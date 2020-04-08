@@ -8,3 +8,4 @@ Variables       machines.yaml
 My TestKKK
     LOG  ${Environment1.PC0}
 	LOG  ${User}
+	LOG  222:111:333:22
