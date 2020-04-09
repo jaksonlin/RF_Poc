@@ -4,10 +4,12 @@ Library  Remote  http://${ADDRESS}:8270  WITH NAME  remote0
 
 *** Variables ***
 ${ADDRESS}  127.0.0.1
+${test_device}  remote0
 
 *** Test Cases ***
 Count Items in Directory on both machines
-    ${items1} =  remote0.Count Items In Directory  ${CURDIR}
+	# when you need to use variable to design which server to go, you need to use "Run Keyword"
+    ${items1} =  Run Keyword  ${test_device}.Count Items In Directory  ${CURDIR}
     ${items2} =  remote0.Count Items In Directory  ${TEMPDIR}
     Log  ${items1} items in '${CURDIR}' and ${items2} items in '${TEMPDIR}'
 
