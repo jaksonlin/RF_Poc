@@ -1,5 +1,6 @@
 *** Settings ***
 Library    MyLibrary     10.0.0.1    8080
+Library    MyScopedLib
 Resource       machines.robot
 Resource       moduleA/common.robot
 Variables       machines.yaml
@@ -13,18 +14,24 @@ ${User}  eth1
 
 *** Test Cases ***
 My Test
+	bump_global_count
     send message  Hey John
     ${dict} =  get_a_dict
     Should Be Equal  ${dict["a"]}  1
     Should Be Equal  ${dict["b"].port}  ${8080}
     ${item} =  get conn
     Should Be Equal  ${item.host}  10.0.0.1
+	${ret_id}=  get_global_count
+	LOG   ${ret_id}
 
 My Test2
     [Setup]     my_lib_setup 
     [Teardown]  my_lib_teardown
+	bump_global_count
     ${dict} =  get_a_dict
     Should Be Equal  ${dict["c"]}  50000
+	${ret_id}=  get_global_count
+	LOG   ${ret_id}
 
 My Test3
     [Teardown]  my_teardown_new
@@ -46,6 +53,7 @@ My Test5
     Should Be Equal  ${item.host}  10.0.0.1
     check server config   端口=${8080}   地址=10.0.0.1
 	check server config  地址=10.0.0.1  端口=${8080}  OTHERINFO=${Hello} #@ 在machines.robot里
+
 
 My Test6
     LOG  ${Environment1.PC0}
