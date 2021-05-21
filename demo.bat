@@ -5,4 +5,4 @@ REM robot searches resource or variable files in the python path
 SET PYTHONPATH=.\robotfirst;.\common_keywords;.\testenv
 del *.html 
 del *.xml
-robot testcases/moduleA
+robot --include Level-BVTANDUSER-XXX testcases/moduleA

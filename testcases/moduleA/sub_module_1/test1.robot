@@ -3,6 +3,7 @@ Library    MyLibrary     10.0.0.1    8080
 Library    MyScopedLib
 Resource       machines.robot
 Resource       moduleA/common.robot
+
 Variables       machines.yaml
 Suite Setup     my_suit_setup
 Suite Teardown  my_suit_teardown
